@@ -1,11 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
 import BiWeeklyChart from "./components/BiWeeklyChart";
+import ExtraPaymentChart from "./components/ExtraPaymentChart";
 
 function App() {
   return (
     <div>
       <BiWeeklyChart />
+      <ExtraPaymentChart />
     </div>
     // <div className="App">
     //   <header className="App-header">

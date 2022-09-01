@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import biWeeklyResponseData from "./BiWeeklyResponseData.js";
+import extraPaymentResponseData from "./ExtraPaymentResponseData.js";
 
 Chart.register(ChartDataLabels);
 
-const BiWeeklyChart = (props) => {
-  const [biWeeklyGraphic, setBiWeeklyGraphic] = useState("");
+const ExtraPaymentChart = (props) => {
+  const [extraPaymentGraphic, setExtraPaymentGraphic] = useState("");
   const [chartCreated, setChartCreated] = useState(false);
 
   useEffect(() => {
@@ -45,22 +45,18 @@ const BiWeeklyChart = (props) => {
   };
 
   const createGraph = async () => {
-    // let breakdown = calculateTotal();
-
-    // If a chart already exists, destroy it
-    // if (biWeeklyGraphic) {
-    //   biWeeklyGraphic.destroy();
-    // }
-
-    var biWeeklyAmortization = await biWeeklyResponseData();
-
+    var extraPaymentAmortization = await extraPaymentResponseData();
     // create amortization graph
-    lineChart(biWeeklyAmortization);
+    lineChart(extraPaymentAmortization);
+
+    if (!chartCreated) {
+      setChartCreated(true);
+    }
   };
 
   function lineChart(response) {
-    if (biWeeklyGraphic && biWeeklyGraphic != "") {
-      biWeeklyGraphic.destroy();
+    if (extraPaymentGraphic && extraPaymentGraphic != "") {
+      extraPaymentGraphic.destroy();
     }
 
     let term = [];
@@ -78,24 +74,22 @@ const BiWeeklyChart = (props) => {
     for (let i = 0; i < response.schedule.length; i++) {
       pSum += parseFloat(response.schedule[i].principal.replace(/[$,]/g, ""));
       // console.log(`pSum: ${pSum}`);
-      if (i % 26 == 0) {
+      if (i % 12 == 0) {
         principalValues.push(pSum);
       }
 
       iSum += parseFloat(response.schedule[i].interest.replace(/[$,]/g, ""));
       // console.log(`iSum: ${iSum}`);
-      if (i % 26 == 0) {
+      if (i % 12 == 0) {
         interestValues.push(iSum);
       }
 
-      if (i % 26 == 0) {
+      if (i % 12 == 0) {
         balanceValues.push(
           parseFloat(response.schedule[i].balance.replace(/[$,]/g, ""))
         );
       }
     }
-
-    // console.log(`iSum: ${iSum}`);
 
     balanceValues.push(
       parseFloat(
@@ -112,7 +106,7 @@ const BiWeeklyChart = (props) => {
 
     interestValues.push(iSum);
 
-    const ctx = document.getElementById("lineChart");
+    const ctx = document.getElementById("lineChart2");
 
     const lineChart = new Chart(ctx, {
       data: {
@@ -144,7 +138,7 @@ const BiWeeklyChart = (props) => {
         plugins: {
           title: {
             display: true,
-            text: "Biweekly Amortization Graph",
+            text: "Extra Payment Amortization Graph",
           },
           datalabels: {
             display: false,
@@ -168,7 +162,7 @@ const BiWeeklyChart = (props) => {
         },
       },
     });
-    setBiWeeklyGraphic(lineChart);
+    setExtraPaymentGraphic(lineChart);
     setChartCreated(true);
   }
 
@@ -176,14 +170,14 @@ const BiWeeklyChart = (props) => {
     <div className="canvas-container">
       <div style={{ height: "400px", width: "500px" }}>
         <canvas
-          id="lineChart"
+          id="lineChart2"
           role="chart"
           aria-label="Line Chart"
-          // onClick={createGraph}
+          //   onClick={createGraph}
         ></canvas>
       </div>
     </div>
   );
 };
 
-export default BiWeeklyChart;
+export default ExtraPaymentChart;

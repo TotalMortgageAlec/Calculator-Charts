@@ -63,9 +63,6 @@ function extraPayment(balance, interestRate, terms, extra, extraTerm) {
   console.log(result);
   result["schedule"] = [];
 
-  console.log("Monthly payment: " + payment);
-  console.log("---------------------------------");
-
   let interestSum = 0;
 
   for (let x = 1, row = {}; x < n; x++, row = {}) {
@@ -111,7 +108,6 @@ function extraPayment(balance, interestRate, terms, extra, extraTerm) {
     row.balance = formatToCurrency(l);
     result.schedule.push(row);
   }
-  console.log(interestSum);
   return result;
 }
 

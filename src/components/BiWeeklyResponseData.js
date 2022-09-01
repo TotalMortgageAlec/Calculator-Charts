@@ -1,5 +1,4 @@
 var biWeeklyCalc = require("./BiWeeklyCalc");
-var extraPayment = require("./ExtraPaymentCalc");
 
 var biWeeklyResponseData = async () => {
   var request = {};
