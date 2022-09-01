@@ -58,9 +58,6 @@ function biWeekly(balance, interestRate, terms) {
   result["total_paid"] = formatToCurrency(payment * terms);
   result["schedule"] = [];
 
-  console.log("Monthly payment: " + payment);
-  console.log("---------------------------------");
-
   let interestSum = 0;
 
   for (let x = 1, row = {}; x < N; x++, row = {}) {
@@ -68,8 +65,6 @@ function biWeekly(balance, interestRate, terms) {
       break;
     }
     let interest = l * (eff / 26.0);
-    console.log(x + 1);
-    console.log("Interest: " + interest);
     interestSum += interest;
 
     let principalPayment = biWeeklyPayment - interest;
@@ -79,9 +74,7 @@ function biWeekly(balance, interestRate, terms) {
     if (l < 0) {
       principalPayment += l;
       l = 0;
-      console.log("Principal: " + principalPayment);
-      console.log("New Balance: " + l);
-      console.log("");
+
       row.count = x;
       row.principal = formatToCurrency(principalPayment);
       row.interest = formatToCurrency(interest);
@@ -91,19 +84,12 @@ function biWeekly(balance, interestRate, terms) {
       break;
     }
 
-    console.log("Principal: " + principalPayment);
-    console.log("New Balance: " + l);
-    console.log("");
-
     row.count = x;
     row.principal = formatToCurrency(principalPayment);
     row.interest = formatToCurrency(interest);
     row.balance = formatToCurrency(l);
     result.schedule.push(row);
   }
-
-  console.log("Total Interest: " + interestSum);
-  console.log("Average interest: " + intAvg);
   console.log(result);
   return result;
 }

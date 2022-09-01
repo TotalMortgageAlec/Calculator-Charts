@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import responseData from "./ResponseData";
+import biWeeklyResponseData from "./BiWeeklyResponseData.js";
 
 Chart.register(ChartDataLabels);
 
@@ -37,10 +37,9 @@ const BiWeeklyChart = (props) => {
     return "$" + s;
   };
 
-  const createGraph = (event) => {
+  const createGraph = async (event) => {
     let key = event.target.name,
       value = event.target.value;
-
     // let breakdown = calculateTotal();
 
     // If a chart already exists, destroy it
@@ -48,8 +47,10 @@ const BiWeeklyChart = (props) => {
     //   biWeeklyGraphic.destroy();
     // }
 
+    var biWeeklyAmortization = await biWeeklyResponseData();
+
     // create amortization graph
-    // lineChart(responseData);
+    lineChart(biWeeklyAmortization);
   };
 
   function lineChart(response) {
@@ -62,7 +63,7 @@ const BiWeeklyChart = (props) => {
     let interestValues = [];
     let balanceValues = [];
 
-    for (let i = 0; i <= 30; i++) {
+    for (let i = 0; i <= response.number_of_months / 12; i++) {
       term.push(i);
     }
 
@@ -72,24 +73,24 @@ const BiWeeklyChart = (props) => {
     for (let i = 0; i < response.schedule.length; i++) {
       pSum += parseFloat(response.schedule[i].principal.replace(/[$,]/g, ""));
       // console.log(`pSum: ${pSum}`);
-      if (i % 12 == 0) {
+      if (i % 26 == 0) {
         principalValues.push(pSum);
       }
 
       iSum += parseFloat(response.schedule[i].interest.replace(/[$,]/g, ""));
       // console.log(`iSum: ${iSum}`);
-      if (i % 12 == 0) {
+      if (i % 26 == 0) {
         interestValues.push(iSum);
       }
 
-      if (i % 12 == 0) {
+      if (i % 26 == 0) {
         balanceValues.push(
           parseFloat(response.schedule[i].balance.replace(/[$,]/g, ""))
         );
       }
     }
 
-    console.log(`iSum: ${iSum}`);
+    // console.log(`iSum: ${iSum}`);
 
     balanceValues.push(
       parseFloat(
@@ -169,7 +170,12 @@ const BiWeeklyChart = (props) => {
   return (
     <div className="canvas-container">
       <div style={{ height: "400px", width: "500px" }}>
-        <canvas id="lineChart" role="chart" aria-label="Line Chart"></canvas>
+        <canvas
+          id="lineChart"
+          role="chart"
+          aria-label="Line Chart"
+          onClick={createGraph}
+        ></canvas>
       </div>
     </div>
   );

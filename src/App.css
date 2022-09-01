@@ -43,4 +43,6 @@
   /* left: 70em; */
   align-items: right;
   margin: 10em auto;
+  cursor: pointer;
+  pointer-events: auto;
 }
