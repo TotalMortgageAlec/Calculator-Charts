@@ -1,6 +1,5 @@
 var biWeekly = require("./BiWeeklyCalc");
 var extraPayment = require("./ExtraPaymentCalc");
-// var plotBiWeekly = require("./PlotBiWeekly");
 
 var handler = async (event) => {
   var request = {};
@@ -18,14 +17,14 @@ var handler = async (event) => {
   request2["extra"] = 100;
   request2["extra_term"] = 60; // in payment periods --- range: (1 - (terms * 12))
 
-  biWeeklyData = await biWeekly(request);
-  //   biWeeklyDataGraph = await plotBiWeekly(biWeeklyData);
+  var biWeeklyData = await biWeekly(request);
+  //   var biWeeklyDataGraph = await plotBiWeekly(biWeeklyData);
 
-  extraPaymentData = await extraPayment(request2);
-  //   extraPaymentDataGraph = await plotExtraPayment(extraPaymentData);
+  // var extraPaymentData = await extraPayment(request2);
+  //   var extraPaymentDataGraph = await plotExtraPayment(extraPaymentData);
 
   console.log(JSON.stringify(biWeeklyData));
-  console.log(JSON.stringify(extraPaymentData));
+  // console.log(JSON.stringify(extraPaymentData));
 };
 
 handler(null);

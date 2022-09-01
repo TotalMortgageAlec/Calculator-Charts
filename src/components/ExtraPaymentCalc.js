@@ -41,13 +41,13 @@ function formatToCurrency(amount) {
  */
 
 function extraPayment(balance, interestRate, terms, extra, extraTerm) {
-  l = balance;
-  eff = interestRate;
-  c = eff / 12;
-  n = terms * 12;
-  N = terms * 26;
-  extraPayment = extra;
-  chosenTerm = extraTerm;
+  var l = balance;
+  var eff = interestRate;
+  var c = eff / 12;
+  var n = terms * 12;
+  var N = terms * 26;
+  var extraPayment = extra;
+  var chosenTerm = extraTerm;
 
   let payment = (l * (c * (1 + c) ** n)) / ((1 + c) ** n - 1);
 

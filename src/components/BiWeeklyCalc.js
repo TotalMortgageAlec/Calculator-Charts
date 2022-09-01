@@ -39,14 +39,14 @@ function formatToCurrency(amount) {
  */
 
 function biWeekly(balance, interestRate, terms) {
-  l = balance;
-  eff = interestRate;
-  c = interestRate / 12;
-  n = terms * 12;
-  N = terms * 26;
+  var l = balance;
+  var eff = interestRate;
+  var c = interestRate / 12;
+  var n = terms * 12;
+  var N = terms * 26;
 
   let payment = (l * (c * (1 + c) ** n)) / ((1 + c) ** n - 1);
-  biWeeklyPayment = payment / 2;
+  var biWeeklyPayment = payment / 2;
 
   var result = {};
 
@@ -56,7 +56,6 @@ function biWeekly(balance, interestRate, terms) {
   result["monthly_payment"] = formatToCurrency(payment);
   result["biweekly_payment"] = formatToCurrency(biWeeklyPayment);
   result["total_paid"] = formatToCurrency(payment * terms);
-  // console.log(result);
   result["schedule"] = [];
 
   console.log("Monthly payment: " + payment);
@@ -105,6 +104,7 @@ function biWeekly(balance, interestRate, terms) {
 
   console.log("Total Interest: " + interestSum);
   console.log("Average interest: " + intAvg);
+  console.log(result);
   return result;
 }
 

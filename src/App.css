@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.canvas-container {
+  /* position: absolute; */
+  /* margin-top: 0; */
+  /* left: 70em; */
+  align-items: right;
+  margin: 10em auto;
+}

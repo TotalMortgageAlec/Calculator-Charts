@@ -1,9 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
+import BiWeeklyChart from "./components/BiWeeklyChart";
 
 function App() {
   return (
-    <div></div>
+    <div>
+      <BiWeeklyChart />
+    </div>
     // <div className="App">
     //   <header className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />
