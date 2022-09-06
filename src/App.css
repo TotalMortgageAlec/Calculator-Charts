@@ -37,12 +37,28 @@
   }
 }
 
+#root {
+  height: 100vh;
+  background: #ffffff;
+}
+
+.chart-container {
+  align-items: left;
+  width: 800px;
+}
+
 .canvas-container {
-  /* position: absolute; */
-  /* margin-top: 0; */
-  /* left: 70em; */
-  align-items: right;
-  margin: 1em auto;
+  display: flex;
+  margin: 0;
+  width: 800px;
+}
+
+.canvas {
+  height: 400px;
+  width: 800px;
+  margin: 1em;
+  background: #f0f0f0;
+  border-radius: 0.3em;
   cursor: pointer;
   pointer-events: auto;
 }

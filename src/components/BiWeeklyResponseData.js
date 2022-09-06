@@ -1,13 +1,13 @@
-var biWeeklyCalc = require("./BiWeeklyCalc");
+var biWeeklyCalc = require('./BiWeeklyCalc');
 
 var biWeeklyResponseData = async () => {
   var request = {};
   // var request2 = {};
 
-  request["responseType"] = "json";
-  request["loan_amount"] = 150000;
-  request["interest"] = 3.25;
-  request["terms"] = 30;
+  request['responseType'] = 'json';
+  request['loan_amount'] = 150000;
+  request['interest'] = 3.25;
+  request['terms'] = 30;
 
   // request2["responseType"] = "json";
   // request2["loan_amount"] = 480000;
