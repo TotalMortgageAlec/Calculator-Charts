@@ -8,7 +8,7 @@ var extraPaymentResponseData = async () => {
   request["interest"] = 3.25;
   request["terms"] = 30; // in years
   request["extra"] = 56.14;
-  request["extra_term"] = 1; // in payment periods --- range: (1 - (terms * 12))
+  request["extra_term"] = 1; // in payment periods -- range: (1 - (terms * 12))
 
   var extraPaymentData = await extraPaymentCalc(request);
   return extraPaymentData;
