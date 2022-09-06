@@ -5,8 +5,8 @@ var biWeeklyResponseData = async () => {
   // var request2 = {};
 
   request["responseType"] = "json";
-  request["loan_amount"] = 480000;
-  request["interest"] = 5.27;
+  request["loan_amount"] = 150000;
+  request["interest"] = 3.25;
   request["terms"] = 30;
 
   // request2["responseType"] = "json";
